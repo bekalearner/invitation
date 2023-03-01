@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', event => {
             reject()
         })
         .then((guest) => {
-            fetch('http://localhost:3000', {
+            fetch('http://localhost:3000/api', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -86,13 +86,15 @@ window.addEventListener('DOMContentLoaded', event => {
                 body: JSON.stringify(guest)
             }).then(data => {
                 console.log(data)
+                
                 if(data.status >= 200 && data.status < 300){
                     alert('Приглашение отправленно')
                     $guestForm.reset()
                 }else{
-                    alert('Что то пошло не так')
+                    alert('Гость уже был приглашен')
+                    $guestForm.reset()
                 }
-                
+    
             })
         })
         .catch(() => alert('Введите корректные данные'))      
