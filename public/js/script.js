@@ -97,8 +97,4 @@ window.addEventListener('DOMContentLoaded', event => {
         })
         .catch(() => alert('Введите корректные данные'))      
     })
-    setTimeout(() => {
-        const $music = document.querySelector('embed')
-        console.log($music)
-    }, 2000)
 })

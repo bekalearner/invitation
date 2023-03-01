@@ -19,6 +19,11 @@
     "whatsapp-web.js": "^1.19.4"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^16.0.3",
     "mongoose": "^7.0.0"
+  },
+  "engines": {
+    "node": "18.14.0"
   }
 }

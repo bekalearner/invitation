@@ -1,8 +1,11 @@
 // ---------------MODULES--------------
 const express = require('express')
 const mongoose = require('mongoose')
+require('dotenv').config
 const invitationGenerator = require('./routes/inivtation-generator-route')
 const invitation = require('./routes/invitation-route')
+const client = require('./helpers/whatsapp-client')
+const { errorMsg, successMsg } = require('./helpers/terminal-chalk')
 
 
 // -------------SERVER--------------
@@ -10,11 +13,9 @@ const invitation = require('./routes/invitation-route')
 
 const app = express()
 
-const config = {PORT: 3000, HOST: 'localhost'}
-const { PORT, HOST } = config
 
-app.listen(PORT, HOST, (error) => {
-    error ? console.log(error) : console.log(`Listening port: ${PORT}`)
+app.listen(process.env.PORT, (error) => {
+    error ? console.log(error) : console.log(successMsg(`Listening port: ${PORT}`))
 })
 app.set('view engine', 'ejs')
 
@@ -22,15 +23,15 @@ app.set('view engine', 'ejs')
 // ----------------DATABASE-------------
 
 
-const db = 'mongodb+srv://bekalearner:Kalymbibekalearner6519@cluster1.sfshr37.mongodb.net/invitations'
+const db = ''
 
 mongoose
-  .connect(db)
+  .connect(process.env.MONGO_URL)
   .then( response => {
-    console.log('Connected to db')
+    console.log(successMsg('Connected to Data Base'))
     response.status = 200
 })
-  .catch( error => console.log(error))
+  .catch( error => console.log(errorMsg(error)))
 
 
 // ------------MIDDLE-WARES---------------
