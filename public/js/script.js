@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', event => {
     const guestGeneration = () => {
         const guest = {}
 
-        guest.name = $guestName.value
+        guest.name = $guestName.value.toUpperCase()
         guest.phoneNumber = $guestPhone.value
         $pronounCheckboxes.forEach(checkbox => {
             if(checkbox.checked){

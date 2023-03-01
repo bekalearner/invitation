@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./views/*.ejs"],
+  content: ["./views/*.{ejs,html}"],
   theme: {
     fontFamily: {
       display: ['Marmelad', 'sans-serif']

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marmelad&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Список гостей</title>
+</head>
+<body class="bg-slate-100">
+    <header class="h-24">
+        <div class="fixed h-24 w-full flex flex-col justify-center items-center bg-white">
+            <a href="/" class="p-3 bg-green-600 text-white rounded-sm active:bg-green-800">Вернуться назад</a>
+        </div>
+    </header>
+    <div class="guest__list w-full px-14 flex flex-col">
+        <h2 class="text-4xl text-center py-10">Список гостей</h2>
+        <div class="flex flex-row border-b-2 border-teal-600">
+            <div class="guest__name md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">ФИО</p></div>
+            <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">Номер телефона</p></div>
+            <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">Дата</p></div>
+            <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">Кнопка переотправки</p></div>
+        </div>
+        <%guests.forEach(guest => {%>
+            <div class="guest flex flex-row border-b-2">
+                <div class="guest__name md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.name%></p></div>
+                <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.phoneNumber%></p></div>
+                <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.createdAt.toLocaleDateString()%></p></div>
+                <div class="guest_phone md:w-1/4 flex items-center justify-center"><button class="bg-green-600 text-white rounded-sm active:bg-green-800 p-2">Переотправить</button></div>
+            </div>
+        <%})%>
+    </div>
+</body>
+</html>
