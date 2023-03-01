@@ -90,6 +90,9 @@ window.addEventListener('DOMContentLoaded', event => {
                 if(data.status >= 200 && data.status < 300){
                     alert('Приглашение отправленно')
                     $guestForm.reset()
+                }else if (data.status == 404){
+                    alert('Введен несущевствующий номер')
+                    $guestForm.reset()
                 }else{
                     alert('Гость уже был приглашен')
                     $guestForm.reset()

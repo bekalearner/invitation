@@ -9,33 +9,47 @@ const postInvitationGenerator = (request, response) => {
       .then(guests => {
         new Promise ((resolve, reject) => {
           guests.forEach(guest => {
-            if (guest.name == name && guest.phoneNumber == phoneNumber) {
+            if (guest.name.trim() == name.trim() && guest.phoneNumber == phoneNumber) {
               reject()
             }
           })
           resolve()
         })
         .then(() => {
-          const invitation = new Guest({name, phoneNumber, pronoun, lang})
-          invitation
-            .save()
-            .then(async result => {
-              // const number = result.phoneNumber.slice(1)
-              // const link = `http//:localhost:3000/invitation/${result.lang}/${result._id}`
-              // const chatId = await client.getNumberId(number)
-              
-              // if (chatId) { await client.sendMessage(chatId._serialized, link) }
-              // else {console.log(number, 'Mobile is not registered')}
-              
-              response.status(200).json({status: true})
+          new Promise (async (resolve, reject) => {
+            const whatsappNumber = await client.getNumberId(phoneNumber.slice(1))
+            
+            if (whatsappNumber){
+              resolve()
+            }
+
+            reject()
+
+          })
+            .then(() => {
+              const invitation = new Guest({name, phoneNumber, pronoun, lang})
+              invitation
+                .save()
+                .then(async guest => {
+                  const number = guest.phoneNumber.slice(1)
+                  const link = `http//:localhost:3000/invitation/${guest.lang}/${guest._id}`
+                  const chatId = await client.getNumberId(number)
+                  
+                  if (chatId) { await client.sendMessage(chatId._serialized, link) }
+                  else {console.log(number, 'Mobile is not registered')}
+                  
+                  response.status(200).json({status: 'success'})
+                })
+                .catch( error => console.log(error))
             })
-            .catch( error => console.log(error))
+            .catch(() => {
+              response.status(404).json({status: 'fail'})
+            })
         })
         .catch(() => {
-          console.log('Same guest')
-          response.status(300).json({status: false})
+          response.status(300).json({status: 'fail'})
         })
       })
 }
 
-module.exports = { postInvitationGenerator}
+module.exports = { postInvitationGenerator }
