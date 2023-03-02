@@ -9,7 +9,7 @@ const postInvitationGenerator = (request, response) => {
       .then(guests => {
         new Promise ((resolve, reject) => {
           guests.forEach(guest => {
-            if (guest.name.trim() == name.trim() && guest.phoneNumber == phoneNumber) {
+            if (guest.name.replace(' ', '') == namereplace(' ', '') && guest.phoneNumber == phoneNumber) {
               reject()
             }
           })
