@@ -16,7 +16,7 @@ const { errorMsg, successMsg } = require('./helpers/terminal-chalk')
 
 const app = express()
 
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT
 
 
 app.listen(PORT, (error) => {
