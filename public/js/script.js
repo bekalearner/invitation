@@ -14,8 +14,8 @@ window.addEventListener('DOMContentLoaded', event => {
     $guestPhone.addEventListener('input', event => {
         event.preventDefault()
         
-        if (!$guestPhone.value.includes('+996') || !$guestPhone.value) {
-            $guestPhone.value = '+996'
+        if (!$guestPhone.value.includes('+') || !$guestPhone.value) {
+            $guestPhone.value = '+'
         }
         
     })
