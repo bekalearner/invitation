@@ -8,6 +8,10 @@ window.addEventListener('DOMContentLoaded', event => {
     const $guestPhone = document.querySelector('#guestNumber')
     const $pronounCheckboxes = document.querySelectorAll('.pronounCheckbox')
     const $langCheckboxes = document.querySelectorAll('.langCheckbox')
+    const $messageSendingStatus = document.querySelector('#sending')
+    const $messageSuccesStatus = document.querySelector('#success')
+    const $messageErrorStatus = document.querySelector('#error')
+    const $messageWarningStatus = document.querySelector('#warning')
 
     // --------------Forms---------------
 
@@ -78,6 +82,8 @@ window.addEventListener('DOMContentLoaded', event => {
             reject()
         })
         .then((guest) => {
+            $messageSendingStatus.classList.remove('hidden')
+            $guestForm.reset()
             fetch('/api', {
                 method: 'POST',
                 headers: {
@@ -86,17 +92,23 @@ window.addEventListener('DOMContentLoaded', event => {
                 },
                 body: JSON.stringify(guest)
             }).then(data => {
-                console.log(data)
+                $messageSendingStatus.classList.add('hidden')
                 
                 if(data.status >= 200 && data.status < 300){
-                    alert('Приглашение отправленно')
-                    $guestForm.reset()
+                    $messageSuccesStatus.classList.remove('hidden')
+                    const timer = setTimeout(() => {
+                        $messageSuccesStatus.classList.add('hidden')
+                    }, 2000)
                 }else if (data.status == 404){
-                    alert('Введен несущевствующий номер')
-                    $guestForm.reset()
+                    $messageErrorStatus.classList.remove('hidden')
+                    const timer = setTimeout(() => {
+                        $messageErrorStatus.classList.add('hidden')
+                    }, 2000)
                 }else{
-                    alert('Гость уже был приглашен')
-                    $guestForm.reset()
+                    $messageWarningStatus.classList.remove('hidden')
+                    const timer = setTimeout(() => {
+                        $messageWarningStatus.classList.add('hidden')
+                    }, 2000)
                 }
     
             })

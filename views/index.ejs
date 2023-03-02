@@ -8,7 +8,12 @@
     <title>Invitation Sender</title>
 </head>
 <body>
-
+    <div class="message__status fixed h-32 w-full flex flex-col justify-center items-center">
+        <div class="bg-sky-300 rounded hidden" id="sending"><p class="text-center py-5 px-4 text-sm text-sky-800">Идет отправка ...</p></div>
+        <div class="bg-green-300 rounded hidden" id="success"><p class="text-center py-5 px-4 text-sm text-green-800">Успешно отправлено ✓</p></div>
+        <div class="bg-red-300 rounded hidden" id="error"><p class="text-center py-5 px-4 text-sm text-red-800">Введен несущевствующий номер ☹</p></div>
+        <div class="message_sent bg-amber-300 rounded hidden" id="warning"><p class="text-center py-5 px-4 text-sm text-amber-800">Гость уже был приглашен ☺</p></div>
+    </div>
     <!-- Sending form -->
     <div class="invitation__form flex flex-col h-screen w-full justify-center items-center">
         <h2 class="text-2xl md:text-4xl">Генератор пригласительных</h2>
