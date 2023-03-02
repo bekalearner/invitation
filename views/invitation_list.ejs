@@ -33,7 +33,7 @@
                 <div class="guest__name md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.name%></p></div>
                 <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.phoneNumber%></p></div>
                 <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.createdAt.toLocaleDateString()%></p></div>
-                <div class="guest_phone md:w-1/4 flex items-center justify-center"><button class="bg-green-600 text-white rounded-sm active:bg-green-800 p-2 mb-5" id="<%= guest.id%>">Переотправить</button></div>
+                <div class="guest_phone md:w-1/4 flex items-center justify-center"><button class="bg-green-600 text-white rounded-sm active:bg-green-800 p-2 mb-5 md: m-0" id="<%= guest.id%>">Переотправить</button></div>
             </div>
         <%})%>
     </div>
