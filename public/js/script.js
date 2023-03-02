@@ -71,7 +71,7 @@ window.addEventListener('DOMContentLoaded', event => {
         new Promise ( (resolve, reject) => {
             let guest = null
 
-            if ( $guestName.value.trim() && $guestPhone.value.trim() && $guestPhone.value.slice(4) && $guestPhone.value.length === 13) {
+            if ( $guestName.value.trim() && $guestPhone.value.trim() && $guestPhone.value.slice(4) && $guestPhone.value.length === 20) {
                 guest = guestGeneration()
                 resolve(guest)
             }

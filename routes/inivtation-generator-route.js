@@ -3,6 +3,6 @@ const { getInvitationGenerator} = require('../controllers/invitation-generator-c
 
 const router = express.Router()
 
-router.get('/invitation/generator', getInvitationGenerator)
+router.get('/generator', getInvitationGenerator)
 
 module.exports = router
