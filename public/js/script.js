@@ -77,7 +77,7 @@ window.addEventListener('DOMContentLoaded', event => {
             reject()
         })
         .then((guest) => {
-            fetch('http://localhost:3000/api', {
+            fetch('/api', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -7,7 +7,7 @@ $guestInfo.forEach( guest => {
         event.preventDefault
         
         if (event.target.tagName == 'BUTTON'){
-            fetch('http://localhost:3000/api/list', {
+            fetch('/api/list', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
