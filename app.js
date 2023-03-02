@@ -16,9 +16,11 @@ const { errorMsg, successMsg } = require('./helpers/terminal-chalk')
 
 const app = express()
 
+const PORT = process.env.PORT || 8080
 
-app.listen(process.env.PORT, (error) => {
-    error ? console.log(error) : console.log(successMsg(`Listening port: ${process.env.PORT}`))
+
+app.listen(PORT, (error) => {
+    error ? console.log(error) : console.log(successMsg(`Listening port: ${PORT}`))
 })
 app.set('view engine', 'ejs')
 
@@ -50,3 +52,6 @@ app.use(invitationList)
 app.use(invitation)
 app.use(invitationApi)
 app.use(invitationListApi)
+app.use((request, response) => {
+  response.status(404).render(`${__dirname}/views/error.ejs`)
+})
