@@ -3,12 +3,6 @@ const qrcode = require('qrcode-terminal');
 const { Client} = require('whatsapp-web.js');
 const { successMsg } = require('./terminal-chalk')
 const client = new Client({
-    session: session,
-    //qrTimeoutMs: 120000,
-    //authTimeoutMs: 120000,
-    //restartOnAuthFail: true,
-    //takeoverOnConflict: true
-    //takeoverTimeoutMs: 5000
     puppeteer: {headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-extensions']}
   });
 
