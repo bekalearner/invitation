@@ -3,7 +3,6 @@ const client = require('../helpers/whatsapp-client')
 
 const resendInvitation = (request, response) => {
   const { id } = request.body
-  console.log(request)
 
   Guest
     .findById(id)
