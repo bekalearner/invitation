@@ -2,7 +2,7 @@ const Guest = require('../models/guest')
 const client = require('../helpers/whatsapp-client')
 
 const postInvitationGenerator = (request, response) => {
-    const {name, phoneNumber, pronoun, lang} = request.body
+    const {name, phoneNumber, pronoun, lang, link} = request.body
 
     Guest
       .find()
@@ -27,12 +27,12 @@ const postInvitationGenerator = (request, response) => {
 
           })
             .then(() => {
-              const invitation = new Guest({name, phoneNumber, pronoun, lang})
+              const invitation = new Guest({name, phoneNumber, pronoun, lang, link})
               invitation
                 .save()
                 .then(async guest => {
                   const number = guest.phoneNumber.slice(1)
-                  const link = `http//:localhost:3000/invitation/${guest.lang}/${guest._id}`
+                  const link = `${guest.link}/invitation/${guest.lang}/${guest._id}`
                   const chatId = await client.getNumberId(number)
                   
                   if (chatId) { await client.sendMessage(chatId._serialized, link) }

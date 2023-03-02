@@ -57,6 +57,7 @@ window.addEventListener('DOMContentLoaded', event => {
                 guest.lang = checkbox.value
             }
         })
+        guest.link = window.location.origin
 
         return guest
         
