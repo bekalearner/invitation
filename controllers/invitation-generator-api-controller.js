@@ -32,21 +32,18 @@ const postInvitationGenerator = (request, response) => {
                 .save()
                 .then(async guest => {
                   let message = ''
-
-                  if (guest.lang === 'kg') {
-                    message = 'Кубанычыбызга шериктеш болуп 😊, чакыруубузду кабыл алыңыз . Бисмиллях 💐👇'
-                  } else if (guest.lang == 'ru') {
-                    message = 'Разделите с нами радость неповторимого для нас дня 😊 – дня свадьбы наших детей 💐👇'
-                  }
-
                   const number = guest.phoneNumber.slice(1)
                   const link = `${guest.link}/invitation/${guest.lang}/${guest._id}`
                   const chatId = await client.getNumberId(number)
 
+                  if (guest.lang === 'kg') {
+                    message = `Кубанычыбызга шериктеш болуп 😊, чакыруубузду кабыл алыңыз . Бисмиллях 💐👇 \n\n${link}`
+                  } else if (guest.lang == 'ru') {
+                    message = `Разделите с нами радость неповторимого для нас дня 😊 – дня свадьбы наших детей 💐👇 \n\n${link}`
+                  }
                   
                   if (chatId) { 
-                    await client.sendMessage(chatId._serialized, message)
-                    await client.sendMessage(chatId._serialized, link) 
+                    await client.sendMessage(chatId._serialized, message) 
                   }
                   else { console.log(number, 'Mobile is not registered') }
                   
