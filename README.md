@@ -1,2 +1,2 @@
-# invitation
-It's application for generate invitations and directly send them to invited person's whatsapp
+# invitation_generator
+This is an application to create invitations and send them directly to whatsapp of invited people.
