@@ -30,7 +30,7 @@ app.set('view engine', 'ejs')
 // ----------------DATABASE-------------
 
 mongoose
-  .connect('mongodb+srv://bekalearner:Kalymbibekalearner6519@cluster1.sfshr37.mongodb.net/invitations')
+  .connect('mongodb+srv://bekalearner:Kalymbibekalearner6519@cluster1.sfshr37.mongodb.net/invitations_wedding')
   .then( response => {
     console.log(successMsg('Connected to Data Base'))
     response.status = 200

@@ -1,5 +1,3 @@
-const qrcode = require('qrcode-terminal');
-
 const { Client} = require('whatsapp-web.js');
 const { successMsg } = require('./terminal-chalk')
 const client = new Client({
