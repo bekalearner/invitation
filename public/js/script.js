@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', event => {
             $guestPhone.value = '+'
         }
         const value = $guestPhone.value
-        $guestPhone.value = value.replace(/[A-Za-zА-Яа-я]/g, '')
+        $guestPhone.value = value.replace(/[A-Za-zА-Яа-я.,~!@#$%^&*)(_:;"'/?~><|`= ]/g, '')
     })
 
     // -----------Checkboxes-------------
