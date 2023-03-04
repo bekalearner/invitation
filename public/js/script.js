@@ -21,7 +21,8 @@ window.addEventListener('DOMContentLoaded', event => {
         if (!$guestPhone.value.includes('+') || !$guestPhone.value) {
             $guestPhone.value = '+'
         }
-        
+        const value = $guestPhone.value
+        $guestPhone.value = value.replace(/[A-Za-zА-Яа-я]/g, '')
     })
 
     // -----------Checkboxes-------------
