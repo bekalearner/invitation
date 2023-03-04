@@ -16,6 +16,7 @@
         const $qrcode = document.querySelector('.qr')
 
         const getQR = async () => {
+
             await fetch('/api/qrcode')
             .then(response => {
                 return response.json()
@@ -25,9 +26,8 @@
             })
 
         }
-        getQR()
         setInterval(() => {
-            window.location.reload()
+            getQR()
         }, 5000)
     </script>
 </body>
