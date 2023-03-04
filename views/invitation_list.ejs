@@ -13,16 +13,16 @@
 <body class="bg-slate-100">
     <header class="h-24">
         <div class="fixed h-24 w-full flex flex-col justify-center items-center bg-white">
-            <a href="/generator" class="p-3 bg-sky-600 text-white rounded-sm active:bg-sky-800">Вернуться назад</a>
+            <a href="/generator" class="p-3 bg-green-600 text-white rounded-sm active:bg-green-800">Вернуться назад</a>
         </div>
     </header>
     <div class="message__status fixed h-32 w-full flex flex-col justify-center items-center hidden">
-        <div class="bg-sky-300 rounded hidden" id="sending"><p class="text-center py-5 px-4 text-sm text-sky-800">Идет отправка ...</p></div>
-        <div class="bg-green-300 rounded hidden" id="success"><p class="text-center py-5 px-4 text-sm text-sky-800">Успешно отправлено ✓</p></div>
+        <div class="bg-green-300 rounded hidden" id="sending"><p class="text-center py-5 px-4 text-sm text-green-800">Идет отправка ...</p></div>
+        <div class="bg-green-300 rounded hidden" id="success"><p class="text-center py-5 px-4 text-sm text-green-800">Успешно отправлено ✓</p></div>
     </div>
     <div class="guest__list w-full px-14 flex flex-col">
         <h2 class="text-4xl text-center py-10">Список гостей</h2>
-        <div class="hidden md:flex flex-row border-b-2 border-sky-600">
+        <div class="hidden md:flex flex-row border-b-2 border-green-600">
             <div class="guest__name md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">ФИО</p></div>
             <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">Номер телефона</p></div>
             <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5">Дата</p></div>
@@ -33,7 +33,7 @@
                 <div class="guest__name md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.name%></p></div>
                 <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.phoneNumber%></p></div>
                 <div class="guest_phone md:w-1/4"><p class="text-center text-lg text-teal-900 p-5"><%= guest.createdAt.toLocaleDateString()%> <%= guest.createdAt.toLocaleTimeString('it-IT', {timeZone: 'Asia/Almaty'})%></p></div>
-                <div class="guest_phone md:w-1/4 flex items-center justify-center"><button class="bg-sky-600 text-white rounded-sm active:bg-green-800 p-2 mb-5 md:m-0" id="<%= guest.id%>">Переотправить</button></div>
+                <div class="guest_phone md:w-1/4 flex items-center justify-center"><button class="bg-green-600 text-white rounded-sm active:bg-green-800 p-2 mb-5 md:m-0" id="<%= guest.id%>">Переотправить</button></div>
             </div>
         <%})%>
     </div>
