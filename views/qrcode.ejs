@@ -12,8 +12,17 @@
 </head>
 <body class="invitation__form flex flex-col h-screen w-full justify-center items-center">
     <div class="qr w-64 h-64"></div>
+    <a href="/generator" class="my-5 p-3 bg-green-600 text-white rounded-sm active:bg-green-800 hidden" id="generatorLink">Войти в программу</a>
     <script>
         const $qrcode = document.querySelector('.qr')
+        const $generatorLink = document.querySelector('#generatorLink')
+
+        for (let i = 0; i < 1; i++) {
+            const password = prompt('Введите пороль чтобы продолжить', '')
+            if (password != 'Bektur6519' || password == null || password == ''){
+                i--
+            }
+        }
 
         const getQR = async () => {
 
@@ -21,8 +30,9 @@
             .then(response => {
                 return response.json()
             })
-            .then(qr => {
-                $qrcode.innerHTML = qr.qrcode
+            .then(data => {
+                $qrcode.innerHTML = data.qrcode;
+                (data.status === true) ? $generatorLink.classList.remove('hidden') : $generatorLink.classList.add('hidden')
             })
 
         }

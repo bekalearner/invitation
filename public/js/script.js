@@ -12,7 +12,10 @@ window.addEventListener('DOMContentLoaded', event => {
     const $messageSuccesStatus = document.querySelector('#success')
     const $messageErrorStatus = document.querySelector('#error')
     const $messageWarningStatus = document.querySelector('#warning')
-
+    const $clientCheckingStatus = document.querySelector('#checking')
+    const $clientWaitingStatus = document.querySelector('#waiting')
+    const $clientConnectedStatus = document.querySelector('#connected')
+    const $listButton = document.querySelector('#listButton')
     // --------------Forms---------------
 
     $guestPhone.addEventListener('input', event => {
@@ -67,53 +70,82 @@ window.addEventListener('DOMContentLoaded', event => {
         return guest
         
     }
+
+    // --------------Whatsapp client status checking--------------
+
+    let clientStatus
+    const clientStatusCheck = setInterval(async () => {
+        await fetch('/api/qrcode')
+        .then((response) => response.json())
+        .then((data) => {
+            clientStatus = data.status
+            if (data.status === true) {
+                $clientConnectedStatus.classList.remove('hidden')
+                $clientWaitingStatus.classList.add('hidden')
+                $clientCheckingStatus.classList.add('hidden')
+                $listButton.classList.remove('hidden')
+            }else{
+                $clientWaitingStatus.classList.remove('hidden')
+                $clientConnectedStatus.classList.add('hidden')
+                $clientCheckingStatus.classList.add('hidden')
+                $listButton.classList.add('hidden')
+            }
+            for (let key in data) console.log(`${key}: ${data[key]}`)
+        })
+    },1000)
+
     // ---------------Button--------------
+
     const $sendButton = document.querySelector('#sendButton')
 
     $sendButton.addEventListener('click', event => {
         event.preventDefault()
 
-        new Promise ( (resolve, reject) => {
-            let guest = null
-
-            if ( $guestName.value.trim() && $guestPhone.value.trim() && $guestPhone.value.slice(4) && $guestPhone.value.length <= 20) {
-                guest = guestGeneration()
-                resolve(guest)
-            }
-            reject()
-        })
-        .then((guest) => {
-            $messageSendingStatus.classList.remove('hidden')
-            $guestForm.reset()
-            fetch('/api', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(guest)
-            }).then(data => {
-                $messageSendingStatus.classList.add('hidden')
-                
-                if(data.status >= 200 && data.status < 300){
-                    $messageSuccesStatus.classList.remove('hidden')
-                    const timer = setTimeout(() => {
-                        $messageSuccesStatus.classList.add('hidden')
-                    }, 2000)
-                }else if (data.status == 404){
-                    $messageErrorStatus.classList.remove('hidden')
-                    const timer = setTimeout(() => {
-                        $messageErrorStatus.classList.add('hidden')
-                    }, 2000)
-                }else{
-                    $messageWarningStatus.classList.remove('hidden')
-                    const timer = setTimeout(() => {
-                        $messageWarningStatus.classList.add('hidden')
-                    }, 2000)
-                }
+        if (clientStatus === true) {
+            new Promise ( (resolve, reject) => {
+                let guest = null
     
+                if ( $guestName.value.trim() && $guestPhone.value.trim() && $guestPhone.value.slice(4) && $guestPhone.value.length <= 20) {
+                    guest = guestGeneration()
+                    resolve(guest)
+                }
+                reject()
             })
-        })
-        .catch(() => alert('Введите корректные данные'))      
+            .then((guest) => {
+                $messageSendingStatus.classList.remove('hidden')
+                $guestForm.reset()
+                fetch('/api', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(guest)
+                }).then(data => {
+                    $messageSendingStatus.classList.add('hidden')
+                    
+                    if(data.status >= 200 && data.status < 300){
+                        $messageSuccesStatus.classList.remove('hidden')
+                        const timer = setTimeout(() => {
+                            $messageSuccesStatus.classList.add('hidden')
+                        }, 2000)
+                    }else if (data.status == 404){
+                        $messageErrorStatus.classList.remove('hidden')
+                        const timer = setTimeout(() => {
+                            $messageErrorStatus.classList.add('hidden')
+                        }, 2000)
+                    }else{
+                        $messageWarningStatus.classList.remove('hidden')
+                        const timer = setTimeout(() => {
+                            $messageWarningStatus.classList.add('hidden')
+                        }, 2000)
+                    }
+        
+                })
+            })
+            .catch(() => alert('Введите корректные данные'))      
+        }else{
+            alert('Ватсап не подключен, выполните подключение')
+        }
     })
 })

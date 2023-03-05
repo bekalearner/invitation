@@ -35,7 +35,12 @@
                 <input class="accent-green-600 mx-5 langCheckbox" type="checkbox" name="kg" value="kg">
             </div>
             <button class="p-2 bg-green-600 text-white rounded-sm active:bg-green-800" id="sendButton">Отправить</button>
-            <a href="/list" class="mt-4 p-2 text-center bg-white text-green-600 rounded-sm active:bg-gray-200 ring-2 ring-green-600 active:ring-green-800" id="sendButton">Список гостей</a>
+            <a href="/list" class="mt-4 p-2 text-center bg-white text-green-600 rounded-sm active:bg-gray-200 ring-2 ring-green-600 active:ring-green-800 hidden" id="listButton">Список гостей</a>
+            <div class="status flex flex-col justify-center mt-4">
+                <div class="bg-sky-300 rounded" id="checking"><p class="flex justify-center items-center py-5 px-4 text text-sky-800">Проверка статуса ...</p></div>
+                <div class="bg-amber-300 rounded hidden" id="waiting"><p class="flex justify-center items-center flex-wrap py-5 px-4 text text-amber-800">Статус: Ватсап ждет подключения<a href="/qrcode" class="mt-4 md:ml-6 md:my-0 p-2 bg-amber-600 text-white rounded active:bg-amber-800">Подключить ватсап</a></p></div>
+                <div class="bg-green-300 rounded hidden" id="connected"><p class="flex justify-center items-center py-5 px-4 text text-green-800">Статус: Готово к работе ✓</p></div>
+            </div>
         </form>
     </div>
     
