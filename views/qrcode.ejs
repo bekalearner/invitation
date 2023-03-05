@@ -12,9 +12,11 @@
 </head>
 <body class="invitation__form flex flex-col h-screen w-full justify-center items-center">
     <div class="qr w-64 h-64"></div>
+    <div class="bg-sky-300 rounded" id="waiting"><p class="flex justify-center items-center py-5 px-4 text text-sky-800" >Ожидает подключения...</p></div>
     <a href="/generator" class="my-5 p-3 bg-green-600 text-white rounded-sm active:bg-green-800 hidden" id="generatorLink">Войти в программу</a>
     <script>
         const $qrcode = document.querySelector('.qr')
+        const $waiting = document.querySelector('#waiting')
         const $generatorLink = document.querySelector('#generatorLink')
 
         for (let i = 0; i < 1; i++) {
@@ -32,7 +34,8 @@
             })
             .then(data => {
                 $qrcode.innerHTML = data.qrcode;
-                (data.status === true) ? $generatorLink.classList.remove('hidden') : $generatorLink.classList.add('hidden')
+                (data.status === true) ? $generatorLink.classList.remove('hidden') : $generatorLink.classList.add('hidden');
+                (data.status === true) ? $waiting.classList.add('hidden') : $waiting.classList.remove('hidden');
             })
 
         }
